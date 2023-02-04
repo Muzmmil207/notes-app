@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 
-from .models import Label, Note, User
+from .models.user_model import User
+from .models.notes_model import Note
 
 
 class NoteForm(ModelForm):

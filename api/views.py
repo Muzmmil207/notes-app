@@ -1,4 +1,4 @@
-from app.models import *
+from app.models.user_model import *
 from django.shortcuts import render
 from rest_framework import generics, mixins, viewsets
 from rest_framework.decorators import api_view, permission_classes

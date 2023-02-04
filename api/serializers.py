@@ -1,4 +1,4 @@
-from app.models import Label, Note, User
+from app.models.notes_model import Note
 from rest_framework.serializers import ModelSerializer
 
 
