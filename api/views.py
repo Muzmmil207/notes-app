@@ -17,18 +17,25 @@ def get_routes(request, format=None):
     )
 
 
-class NotesList(generics.GenericAPIView, mixins.ListModelMixin):
+class NotesList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     serializer_class = NotesSerializer
 
     def get(self, request):
 
         return self.list(request)
 
+    def post(self, request):
+        return self.create(request)
+
     def get_queryset(self):
         user = self.request.user
         return user.note_set.all()
 
 
-class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Note.objects.all().annotate()
-    serializer_class = NotesSerializer
+class NoteDetails(generics.GenericAPIView):
+    # queryset = Note.objects.all().annotate()
+    # serializer_class = NotesSerializer
+    def get(self, request, pk):
+        note = Note.objects.get(id=pk)
+        serializer = NotesSerializer(note)
+        return Response(serializer.data)

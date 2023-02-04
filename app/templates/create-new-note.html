@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <form id="new-note" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="submit">
+    </form>
+</main>
+<script src="{% static 'js/create-new-note.js' %}"></script>
+{% endblock %}
