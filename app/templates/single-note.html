@@ -6,6 +6,11 @@
         <div class="note">
         </div>
     </div>
+    <form id="new-note" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="submit">
+    </form>
 </main>
 <script>
     const id = `{{ id }}`

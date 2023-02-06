@@ -1,7 +1,8 @@
-from app.models.user_model import *
+from app.models import *
 from django.shortcuts import render
-from rest_framework import generics, mixins, viewsets
+from rest_framework import generics, mixins, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
@@ -17,15 +18,32 @@ def get_routes(request, format=None):
     )
 
 
-class NotesList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+class NotesList(
+    generics.GenericAPIView,
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+):
     serializer_class = NotesSerializer
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-
+        print(request.user)
+        print(request.auth)
         return self.list(request)
 
-    def post(self, request):
-        return self.create(request)
+    def post(self, request, format=None):
+        serializer = NotesSerializer(data=request.data)
+        print(serializer.is_valid())
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def post(self, request, *args, **kwargs):
+    #     print(request.data)
+    #     return self.create(request, *args, **kwargs)
 
     def get_queryset(self):
         user = self.request.user

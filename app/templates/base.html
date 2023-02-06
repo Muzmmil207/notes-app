@@ -32,8 +32,14 @@
 <body>
     <nav>
         <ul>
+            {% if request.user.is_authenticated %}
             <li><a href=" {% url 'home-page' %} ">home page</a></li>
             <li><a href=" {% url 'new-note' %} ">new-note</a></li>
+            <li><a href=" {% url 'logout' %} ">logout<a></li>
+            {% else %}
+            <li><a href=" {% url 'login' %} ">login<a></li>
+            <li><a href=" {% url 'register' %} ">register<a></li>
+            {% endif %}
         </ul>
     </nav>
     <hr>
