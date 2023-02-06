@@ -2,10 +2,6 @@
 {% load static %}
 {% block content %}
 <main>
-    <div class="all-notes">
-        <div class="note">
-        </div>
-    </div>
     <form id="new-note" method="post">
         {% csrf_token %}
         {{form.as_p}}

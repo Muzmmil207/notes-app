@@ -9,7 +9,9 @@ let csrfToken = document.getElementsByName('csrfmiddlewaretoken')
 form.onsubmit = function (e) {
     e.preventDefault()
 
-    console.log(csrfToken.value)
+    console.log(csrftoken)
+    console.log(title.value)
+    console.log(label.value)
     fetch(url, {
         method: 'POST',
         headers: {
@@ -17,10 +19,10 @@ form.onsubmit = function (e) {
             'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({
+
             'label': label.value,
             'title': title.value,
             'content': content.value,
-            'remind': remind.value
         })
     })
         .then(() => {

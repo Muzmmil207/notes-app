@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
 
 from .decorators import is_not_authenticated
@@ -16,7 +16,8 @@ class HomeView(TemplateView):
 
 @login_required
 def single_note_view(request, pk):
-    form = NoteForm()
+    note = get_object_or_404(Note, id=pk, user=request.user)
+    form = NoteForm(instance=note)
     context = {"id": pk, "form": form}
     return render(request, "single-note.html", context=context)
 

@@ -29,21 +29,17 @@ class NotesList(
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        print(request.user)
-        print(request.auth)
         return self.list(request)
 
     def post(self, request, format=None):
+        request.data["user"] = request.user.id
+
         serializer = NotesSerializer(data=request.data)
-        print(serializer.is_valid())
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def post(self, request, *args, **kwargs):
-    #     print(request.data)
-    #     return self.create(request, *args, **kwargs)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_queryset(self):
         user = self.request.user

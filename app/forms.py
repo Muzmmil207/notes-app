@@ -84,16 +84,15 @@ class NoteForm(ModelForm):
     class Meta:
         model = Note
         fields = [
-            "user",
             "label",
             "title",
             "content",
             "remind",
         ]
 
-    widget = {
-        "label": forms.TextInput(attrs={"class": ""}),
-        "title": forms.TextInput(attrs={"class": ""}),
-        "content": forms.TextInput(attrs={"class": ""}),
-        "remind": forms.TextInput(attrs={"class": "", "type": "datetime-local"}),
-    }
+        widget = {
+            "label": forms.TextInput(attrs={"class": ""}),
+            "title": forms.TextInput(attrs={"class": ""}),
+            "content": forms.TextInput(attrs={"class": ""}),
+            "remind": forms.TextInput(attrs={"class": "", "type": "datetime"}),
+        }
