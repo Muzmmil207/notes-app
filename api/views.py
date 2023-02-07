@@ -23,7 +23,6 @@ class NotesList(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
-    mixins.DestroyModelMixin,
 ):
     serializer_class = NotesSerializer
     permission_classes = [IsAuthenticated]
@@ -43,13 +42,21 @@ class NotesList(
 
     def get_queryset(self):
         user = self.request.user
-        return user.note_set.all()
+        return user.note_set.all().order_by("-created_at", "-updated_at")
 
 
-class NoteDetails(generics.GenericAPIView):
-    # queryset = Note.objects.all().annotate()
-    # serializer_class = NotesSerializer
-    def get(self, request, pk):
-        note = Note.objects.get(id=pk)
-        serializer = NotesSerializer(note)
-        return Response(serializer.data)
+class NoteDetails(
+    generics.GenericAPIView,
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+):
+    queryset = Note.objects.all().annotate()
+    serializer_class = NotesSerializer
+    lookup_field = "id"
+
+    def get(self, request, id):
+        return self.retrieve(request)
+
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)

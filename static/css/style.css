@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-white: #FFFFFF;
+    --bg-color: rgb(0, 75, 251);
+    --txt-color: #b3b2b2;
+}
+
+body {
+    color: var(--txt-color);
+    background-color: var(--color-white);
+}
+
+.wrapper {
+    display: flex;
+    position: relative;
+}
+
+.sidebar {
+    background-color: var(--bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    min-height: 100vh;
+
+}
+
+.main {
+    margin-left: 20%;
+}
