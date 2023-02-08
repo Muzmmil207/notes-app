@@ -157,9 +157,49 @@ aside .logo h3 {
 }
 
 .navbar {
-    height: 70px;
     background-color: var(--bs-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 15px;
 }
+
+.navbar .new-note a {
+    font-size: .8rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bs-blue);
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.navbar form {
+    display: flex;
+}
+
+.navbar form input {
+    border: none;
+    outline: none;
+    padding-left: 7px;
+}
+
+.navbar form button {
+    border: none;
+    outline: none;
+    padding-left: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bs-blue);
+    padding: 4px;
+}
+
+
+
+
+
 
 .notes {
     padding-top: 18px;
