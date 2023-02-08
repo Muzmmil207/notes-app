@@ -1,11 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<main>
-    <div class="all-notes">
+<div class="main">
+    <div class="navbar">
+        <div class="new-note">
+            <a href="">
+                NEW
+                <span class="material-icons-sharp">
+                    note
+                </span>
+            </a>
+        </div>
+        <form method="get">
+            <input type="text" placeholder="Search Notes...">
+            <button type="submit">
+                <span class="material-icons-sharp">
+                    search
+                </span>
+            </button>
+        </form>
+        <div class="notes-number">24 Notes</div>
+    </div>
+    <div class="notes" id="notes">
         <div class="note">
+            <div class="head">
+                <div class="category" id="category">word</div>
+                <div class="date" id="date">1/0/2020</div>
+            </div>
+            <div class="content">
+                <a href="#" class="title" id="title">name prott</a>
+                <a href="#" class="note-text" id="content">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, voluptas, laboriosam sed
+                    consequuntur enim ratione dolor deserunt sit aperiam, ab numquam velit et? Nulla similique
+                    voluptas, doloremque nihil dolore dolorem.
+                </a>
+            </div>
         </div>
     </div>
-</main>
+</div>
 <script src="{% static 'js/all-notes-api.js' %}"></script>
 {% endblock %}

@@ -6,7 +6,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <script>
         function getCookie(name) {
             let cookieValue = null;
@@ -30,21 +33,80 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
+    <div class="wrapper">
+        <aside>
+            <div class="logo">
+                <span class="material-icons-sharp">
+                    notes
+                </span>
+                <h3>my notes</h3>
+            </div>
+            <hr>
             {% if request.user.is_authenticated %}
-            <li><a href=" {% url 'home-page' %} ">home page</a></li>
-            <li><a href=" {% url 'new-note' %} ">new-note</a></li>
-            <li><a href=" {% url 'logout' %} ">logout<a></li>
+            <div class="sidebar">
+                <a href="{% url 'home-page' %}">
+                    <span class="material-icons-sharp">
+                        home
+                    </span>
+                    <p>main page</p>
+                </a>
+                <a href="">
+                    <span class="material-icons-sharp">
+                        tasks
+                    </span>
+                    <p>tasks</p>
+                </a>
+                <a href="">
+                    <span class="material-icons-sharp">
+                        category
+                    </span>
+                    <p>categories</p>
+                </a>
+            </div>
+            <hr>
+            <div class="category">
+                <h4></h4>
+                <a class="new-category" href="">
+                    <span class="material-icons-sharp">
+                        add_circle
+                    </span>
+                    <p>add new category</p>
+                </a>
+                <button class="btn">categories</button>
+
+                <div class="categories">
+                    <a href="">work <span>4</span></a>
+                    <a href="">reading <span>9</span></a>
+                    <a href="">busies <span>71</span></a>
+                </div>
+            </div>
+            <a class="logout" href="{% url 'logout' %}">
+                <span class="material-icons-sharp">
+                    logout
+                </span>
+                <p>logout</p>
+            </a>
             {% else %}
-            <li><a href=" {% url 'login' %} ">login<a></li>
-            <li><a href=" {% url 'register' %} ">register<a></li>
+            <div class="sidebar">
+                <a href="{% url 'login' %}">
+                    <span class="material-icons-sharp">
+                        home
+                    </span>
+                    <p>login</p>
+                </a>
+                <a href="{% url 'register' %}">
+                    <span class="material-icons-sharp">
+                        tasks
+                    </span>
+                    <p>register</p>
+                </a>
+            </div>
             {% endif %}
-        </ul>
-    </nav>
-    <hr>
-    {% block content %}
-    {% endblock %}
+
+        </aside>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 
 </html>
