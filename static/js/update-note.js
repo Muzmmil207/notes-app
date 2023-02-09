@@ -1,5 +1,5 @@
-let url = '/api/all-notes'
-let form = document.getElementById('new-note')
+let url = `/api/single-notes/${id}`
+let form = document.getElementById('note-form')
 let label = document.getElementById('id_label')
 let title = document.getElementById('id_title')
 let content = document.getElementById('id_content')
@@ -27,7 +27,7 @@ form.onsubmit = function (e) {
         .then(response => response.json())
         .then((data) => {
             if (data.id) {
-                location.href = `/note-${data.id}/`
+                location.reload()
             } else {
                 alert('Error')
             }

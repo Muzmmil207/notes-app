@@ -209,6 +209,7 @@ aside .logo h3 {
 
 .note:hover {
     background-color: var(--bs-gray-200);
+    transform: scale(1.01);
 }
 
 .note .head {
@@ -241,8 +242,6 @@ aside .logo h3 {
     height: 100vh;
     padding: 35px 18px 0;
 }
-
-.form-container form {}
 
 .form-container form .head {
     display: flex;

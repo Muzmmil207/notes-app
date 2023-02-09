@@ -58,5 +58,9 @@ class NoteDetails(
     def get(self, request, id):
         return self.retrieve(request)
 
+    def post(self, request, *args, **kwargs):
+        request.data["user"] = request.user.id
+        return super().update(request, *args, **kwargs)
+
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
