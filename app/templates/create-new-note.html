@@ -2,6 +2,19 @@
 {% load static %}
 {% block content %}
 <div class="main">
+    <!-- Navbar Start -->
+    <div class="navbar">
+        <div class="new-note">
+            <a href="{% url 'new-note' %}">
+                NEW
+                <span class="material-icons-sharp">
+                    note
+                </span>
+            </a>
+        </div>
+        <div class="notes-number">{{notes_len}} Notes</div>
+    </div>
+    <!-- Navbar End -->
     <div class="form-container" id="notes">
         <form id="note-form" method="post" style="width: 100%;">
             {% csrf_token %}

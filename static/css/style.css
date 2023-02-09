@@ -131,7 +131,7 @@ aside .logo h3 {
 .categories a span {
     background-color: var(--bs-danger);
     padding: 5px;
-    border-radius: 50%;
+    border-radius: 3px;
     text-align: center;
 }
 

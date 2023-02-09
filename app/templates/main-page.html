@@ -12,15 +12,15 @@
                 </span>
             </a>
         </div>
-        <form method="get">
-            <input type="text" placeholder="Search Notes...">
+        <form method="get" id="search-form">
+            <input type="text" placeholder="Search Notes..." name="search" id="search-input">
             <button type="submit">
                 <span class="material-icons-sharp">
                     search
                 </span>
             </button>
         </form>
-        <div class="notes-number">24 Notes</div>
+        <div class="notes-number">{{notes_len}} Notes</div>
     </div>
     <!-- Navbar End -->
     <!-- Notes Container Start -->

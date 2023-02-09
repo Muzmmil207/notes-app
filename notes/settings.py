@@ -63,7 +63,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # custom
                 "app.context_processors.labels",
+                "app.context_processors.notes_length",
             ],
         },
     },

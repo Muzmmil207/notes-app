@@ -1,4 +1,5 @@
 from app.models import *
+from django.db.models import Q
 from django.shortcuts import render
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
@@ -42,7 +43,16 @@ class NotesList(
 
     def get_queryset(self):
         user = self.request.user
-        return user.note_set.all().order_by("-created_at", "-updated_at")
+        queryset = user.note_set.all().order_by("-created_at", "-updated_at")
+        search_query = self.request.query_params.get("search")
+
+        if search_query is not None:
+            queryset = queryset.filter(
+                Q(Q(title__iexact=search_query) | Q(title__icontains=search_query))
+                | Q(content__icontains=search_query)
+            )
+
+        return queryset
 
 
 class NoteDetails(
@@ -51,7 +61,8 @@ class NoteDetails(
     mixins.UpdateModelMixin,
     mixins.RetrieveModelMixin,
 ):
-    queryset = Note.objects.all().annotate()
+    queryset = Note.objects.all()
+    queryset.filter
     serializer_class = NotesSerializer
     lookup_field = "id"
 

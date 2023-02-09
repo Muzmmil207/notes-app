@@ -1,6 +1,6 @@
-from django.db.models import Count, Sum
+from django.db.models import Count
 
-from .models import Label
+from .models import Label, Note
 
 
 def labels(request):
@@ -9,3 +9,7 @@ def labels(request):
         .values("name")
         .annotate(count_notes=Count("note"))
     }
+
+
+def notes_length(request):
+    return {"notes_len": Note.objects.filter(user=request.user).count()}
