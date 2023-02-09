@@ -71,6 +71,7 @@ aside {
     background-color: var(--bs-blue);
     padding: 1.4rem .8rem 0;
     color: var(--bs-gray-100);
+    overflow-y: scroll;
 }
 
 aside .logo {
@@ -93,8 +94,6 @@ aside .logo h3 {
     color: var(--bs-gray-300);
     margin-left: 15px;
 }
-
-.category h4 {}
 
 .new-category {
     display: flex;

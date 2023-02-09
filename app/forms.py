@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
 )
 from django.forms import ModelForm
 
-from .models import Note, User
+from .models import Label, Note, User
 
 
 class UserLoginForm(AuthenticationForm):
@@ -94,4 +94,18 @@ class NoteForm(ModelForm):
         )
         self.fields["content"].widget.attrs.update(
             {"class": "form-element", "placeholder": "", "cols": "400", "rows": "39"}
+        )
+
+
+class LabelForm(ModelForm):
+    class Meta:
+        model = Label
+        fields = [
+            "name",
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].widget.attrs.update(
+            {"class": "form-element", "placeholder": "Enter a name for the new label"}
         )

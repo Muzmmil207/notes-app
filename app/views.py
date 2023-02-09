@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
 
 from .decorators import is_not_authenticated
-from .forms import NoteForm, RegistrationForm, UserLoginForm
+from .forms import LabelForm, NoteForm, RegistrationForm, UserLoginForm
 from .models import Label, Note
 
 
@@ -28,6 +28,22 @@ def new_note(request):
     context = {"form": form}
 
     return render(request, "create-new-note.html", context=context)
+
+
+@login_required
+def new_label(request):
+    form = LabelForm()
+    if request.method == "POST":
+        form = LabelForm(request.POST)
+        print(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+            return redirect("new-label")
+    context = {"form": form}
+    return render(request, "create-new-label.html", context=context)
 
 
 @is_not_authenticated

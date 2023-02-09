@@ -67,18 +67,18 @@
             <hr>
             <div class="category">
                 <h4></h4>
-                <a class="new-category" href="">
+                <a class="new-category" href="{% url 'new-label' %}">
                     <span class="material-icons-sharp">
                         add_circle
                     </span>
-                    <p>add new category</p>
+                    <p>add new label</p>
                 </a>
                 <button class="btn">categories</button>
 
                 <div class="categories">
-                    <a href="">work <span>4</span></a>
-                    <a href="">reading <span>9</span></a>
-                    <a href="">busies <span>71</span></a>
+                    {% for label in labels %}
+                    <a href="">{{label.name}} <span>{{label.count_notes}}</span></a>
+                    {% endfor %}
                 </div>
             </div>
             <a class="logout" href="{% url 'logout' %}">
