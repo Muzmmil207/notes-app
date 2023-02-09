@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<main>
-    <form id="new-note" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="submit">
-    </form>
-</main>
+<div class="main">
+    <br><br>
+    <div class="form-container" id="notes">
+        <form id="new-note" method="post" style="width: 100%;">
+            {% csrf_token %}
+            <input type="datetime-local">
+            {{form.media}}
+            {{form.as_p}}
+            <input type="submit" value="submit">
+        </form>
+    </div>
+</div>
+
 <script>
     const id = `{{ id }}`
-
 </script>
 <script src="{% static 'js/singel-note-api.js' %}"></script>
 {% endblock %}

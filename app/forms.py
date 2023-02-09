@@ -18,7 +18,7 @@ class UserLoginForm(AuthenticationForm):
     )
 
 
-class RegistrationForm(forms.ModelForm):
+class RegistrationForm(ModelForm):
     first_name = forms.CharField(
         label="Enter First Name", min_length=4, max_length=150, help_text="Required"
     )
@@ -76,23 +76,18 @@ class RegistrationForm(forms.ModelForm):
 
 
 class NoteForm(ModelForm):
-    label = forms.Select()
-    title = forms.CharField(label="Note Title", required=False)
-    content = forms.Textarea()
-    remind = forms.DateTimeInput()
-
     class Meta:
         model = Note
         fields = [
             "label",
             "title",
-            "content",
             "remind",
+            "content",
         ]
 
-        widget = {
-            "label": forms.TextInput(attrs={"class": ""}),
-            "title": forms.TextInput(attrs={"class": ""}),
-            "content": forms.TextInput(attrs={"class": ""}),
-            "remind": forms.TextInput(attrs={"class": "", "type": "datetime"}),
-        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["remind"].widget.attrs.update({"class": "form-element", "placeholder": ""})
+        self.fields["label"].widget.attrs.update({"class": "form-element", "placeholder": ""})
+        self.fields["title"].widget.attrs.update({"class": "form-element", "placeholder": ""})
+        self.fields["content"].widget.attrs.update({"class": "form-element", "placeholder": ""})

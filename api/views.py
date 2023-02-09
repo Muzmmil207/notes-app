@@ -32,9 +32,9 @@ class NotesList(
 
     def post(self, request, format=None):
         request.data["user"] = request.user.id
-
-        serializer = NotesSerializer(data=request.data)
-        if serializer.is_valid():
+        data = request.data
+        serializer = NotesSerializer(data=data)
+        if serializer.is_valid() and len(data["title"]) > 0 or len(data["content"]) > 0:
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 

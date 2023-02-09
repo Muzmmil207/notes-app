@@ -152,8 +152,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 CKEDITOR_CONFIGS = {
     "default": {
         "toolbar": "full",
-        "height": 300,
-        "width": "100%",
+        "height": "90vh",
+        "width": "100vw",
     },
 }
 
