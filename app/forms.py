@@ -89,5 +89,9 @@ class NoteForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["remind"].widget.attrs.update({"class": "form-element", "placeholder": ""})
         self.fields["label"].widget.attrs.update({"class": "form-element", "placeholder": ""})
-        self.fields["title"].widget.attrs.update({"class": "form-element", "placeholder": ""})
-        self.fields["content"].widget.attrs.update({"class": "form-element", "placeholder": ""})
+        self.fields["title"].widget.attrs.update(
+            {"class": "form-element", "placeholder": "Enter a Title"}
+        )
+        self.fields["content"].widget.attrs.update(
+            {"class": "form-element", "placeholder": "", "cols": "400", "rows": "39"}
+        )

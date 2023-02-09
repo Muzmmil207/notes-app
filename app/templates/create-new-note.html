@@ -2,13 +2,25 @@
 {% load static %}
 {% block content %}
 <div class="main">
-    <br><br>
     <div class="form-container" id="notes">
         <form id="new-note" method="post" style="width: 100%;">
             {% csrf_token %}
-            {{form.media}}
-            {{form.as_p}}
-            <input type="submit" value="submit">
+            <div class="head">
+                <div>
+                    {{form.title.label}}
+                    {{form.title}}
+                </div>
+                <div>
+                    {{form.label.label}}
+                    {{form.label}}
+                </div>
+                <div>
+                    {{form.remind.label}}
+                    {{form.remind}}
+                </div>
+                <input type="submit" value="Save" class="form-element submit">
+            </div>
+            {{form.content}}
         </form>
     </div>
 </div>

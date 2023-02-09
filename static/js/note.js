@@ -2,14 +2,15 @@ let url = '/api/all-notes'
 let form = document.getElementById('new-note')
 let label = document.getElementById('id_label')
 let title = document.getElementById('id_title')
-// let content = document.getElementById('id_content')
-let cke_editable = document.querySelector('.cke_editable')
+let content = document.getElementById('id_content')
 let remind = document.getElementById('id_remind')
-remind.setAttribute('type', 'datetime-local')
+
+remind.setAttribute('type', 'datetime-local') // Update the remind input from text to datetime-local
+
+//  Sending Post request to the API to store the new Note
 form.onsubmit = function (e) {
     e.preventDefault()
-    console.log(remind.value)
-    console.log(cke_editable)
+    console.log(remind.value.length)
     fetch(url, {
         method: 'POST',
         headers: {
@@ -20,12 +21,15 @@ form.onsubmit = function (e) {
             'label': label.value,
             'title': title.value,
             'content': content.value,
-            'remind': remind.value
+            'remind': remind.value.length > 0 ? remind.value : null
         })
     })
         .then(response => response.json())
         .then((data) => {
-            // location.href = `/note-${data.id}/`
+            if (data.id) {
+                location.href = `/note-${data.id}/`
+            } else {
+                alert('Error')
+            }
         })
-
 }

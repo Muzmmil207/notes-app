@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <title> MY NOTES </title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar Start -->
+        <aside>
+            <div class="logo">
+                <span class="material-icons-sharp">
+                    notes
+                </span>
+                <h3>my notes</h3>
+            </div>
+            <hr>
+
+            <div class="sidebar">
+                <a href="/">
+                    <span class="material-icons-sharp">
+                        home
+                    </span>
+                    <p>main page</p>
+                </a>
+                <a href="">
+                    <span class="material-icons-sharp">
+                        tasks
+                    </span>
+                    <p>tasks</p>
+                </a>
+                <a href="">
+                    <span class="material-icons-sharp">
+                        category
+                    </span>
+                    <p>categories</p>
+                </a>
+            </div>
+            <hr>
+            <div class="category">
+                <h4></h4>
+                <a class="new-category" href="">
+                    <span class="material-icons-sharp">
+                        add_circle
+                    </span>
+                    <p>add new category</p>
+                </a>
+                <button class="btn">categories</button>
+
+                <div class="categories">
+                    <a href="">work <span>4</span></a>
+                    <a href="">reading <span>9</span></a>
+                    <a href="">busies <span>71</span></a>
+                </div>
+            </div>
+            <a class="logout" href="/logout">
+                <span class="material-icons-sharp">
+                    logout
+                </span>
+                <p>logout</p>
+            </a>
+
+
+        </aside>
+        <!-- Sidebar End -->
+
+        <div class="main">
+            <div class="form-container" id="notes">
+                <form id="new-note" method="post">
+                    <div class="head">
+                        <input type="text" name="title" maxlength="135" class="form-element" placeholder="title"
+                            id="id_title">
+                        <select name="label" class="form-element" placeholder="" id="id_label">
+                            <option value="" selected>---------</option>
+                            <option value="38a00ff7-b4cf-4aa4-87c5-91f1a238450d"> | World across spend life several
+                                forget reduce approach. Voice their worker make energy card. World figure front station
+                                step above decide question.
+                                Institution buy since light product thus difference age.
+                            </option>
+                        </select>
+                        <input type="datetime-local" name="remind" class="form-element" placeholder="" id="id_remind">
+                        <input type="submit" value="Save" class="form-element">
+                    </div>
+                    <div class="django-ckeditor-widget" class="content" data-field-id="id_content"
+                        style="display: inline-block;">
+                        <textarea name="content" cols="400" rows="39" class="form-element" placeholder=""
+                            id="id_content" data-processed="0"
+                            data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;full&quot;, &quot;height&quot;: &quot;90vh&quot;, &quot;width&quot;: &quot;100vw&quot;, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;language&quot;: &quot;en-us&quot;}"
+                            data-external-plugin-resources="[]" data-id="id_content"
+                            data-type="ckeditortype"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
