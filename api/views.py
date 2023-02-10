@@ -62,7 +62,6 @@ class NoteDetails(
     mixins.RetrieveModelMixin,
 ):
     queryset = Note.objects.all()
-    queryset.filter
     serializer_class = NotesSerializer
     lookup_field = "id"
 
