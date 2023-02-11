@@ -11,7 +11,13 @@ async function GetNotes(query = null) {
         url = url + `?search=${query.replace(' ', '+')}`
     }
 
-    let response = await fetch(url)
+    let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Token ${userToken}`
+        },
+    })
     let data = await response.json()
     let notes = data.results
 

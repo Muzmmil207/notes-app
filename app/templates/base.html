@@ -27,6 +27,9 @@
             return cookieValue;
         }
         const csrftoken = getCookie('csrftoken');
+        '{% if request.user.is_authenticated %}'
+        const userToken = '{{ request.user.auth_token.key }}'
+        '{% endif %}'
     </script>
 
     <title>{% block title%} MY NOTES {% endblock %} </title>
