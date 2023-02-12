@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 
 from .decorators import is_not_authenticated
 from .forms import LabelForm, NoteForm, RegistrationForm, UserLoginForm
-from .models import Label, Note
+from .models import Note
 
 
 class HomeView(TemplateView):
@@ -18,6 +18,7 @@ class HomeView(TemplateView):
 def single_note_view(request, pk):
     note = get_object_or_404(Note, id=pk, user=request.user)
     form = NoteForm(instance=note)
+
     context = {"id": pk, "form": form}
     return render(request, "single-note.html", context=context)
 

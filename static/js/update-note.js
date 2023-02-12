@@ -15,6 +15,7 @@ form.onsubmit = function (e) {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
+            'Authorization': `Token ${userToken}`,
             'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({
