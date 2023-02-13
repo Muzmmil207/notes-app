@@ -30,8 +30,8 @@ async function GetNotes(query = null) {
                 <div class="date" id="date">${notes[i].updated_at}</div>
             </div>
             <div class="content">
-                <a href="note-${notes[i]['id']}" class="title" id="title">${notes[i].title || ''}</a>
-                <a href="note-${notes[i]['id']}" class="note-text" id="content">
+                <a href="${notes[i]['url']}" class="title" id="title">${notes[i].title || ''}</a>
+                <a href="${notes[i]['url']}" class="note-text" id="content">
                     ${notes[i]['content'].slice(0, 100) || ''}...
                 </a>
             </div>

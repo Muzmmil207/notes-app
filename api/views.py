@@ -1,8 +1,9 @@
 from app.models import *
 from django.db.models import Q
-from rest_framework import generics, mixins, status
+from rest_framework import generics, mixins, status, views
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import AdminRenderer
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
@@ -11,6 +12,7 @@ from .serializers import NotesSerializer
 
 @api_view(["GET"])
 def get_routes(request, format=None):
+
     return Response(
         {
             "all user notes": reverse("notes_list", request=request, format=format),
@@ -34,7 +36,11 @@ class NotesList(
         request.data["user"] = request.user.id
         data = request.data
         serializer = NotesSerializer(data=data)
-        if serializer.is_valid() and len(data["title"]) > 0 or len(data["content"]) > 0:
+        if (
+            serializer.is_valid(raise_exception=True)
+            and len(data["title"]) > 0
+            or len(data["content"]) > 0
+        ):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -64,7 +70,7 @@ class NoteDetails(
     serializer_class = NotesSerializer
     lookup_field = "id"
 
-    def get(self, request, id):
+    def get(self, request, *args, **kwargs):
         return self.retrieve(request)
 
     def post(self, request, *args, **kwargs):

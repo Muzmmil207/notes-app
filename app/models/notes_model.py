@@ -3,7 +3,9 @@ import uuid
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.db.models import CASCADE, Model
+from django.urls import reverse
 from django.utils.translation import gettext as _
+
 from .label_model import Label
 from .user_model import User
 
@@ -42,6 +44,9 @@ class Note(Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse("single-note", kwargs={"pk": self.id})
 
     def __str__(self):
         return f"{self.user.email} | {self.title}"

@@ -30,7 +30,7 @@ form.onsubmit = function (e) {
             if (data.id) {
                 location.reload()
             } else {
-                alert('Error')
+                alert('HTTP 400 Bad Request')
             }
         })
 }
