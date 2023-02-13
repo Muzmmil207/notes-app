@@ -50,8 +50,8 @@ class NotesSerializer(ModelSerializer):
 class LabelsSerializer(ModelSerializer):
     """A serializer class for Label model"""
 
-    notes = serializers.StringRelatedField(many=True)
+    notes = NotesSerializer(many=True, read_only=True)
 
     class Meta:
         model = Label
-        fields = ["user", "name", "notes", "id"]
+        fields = ["user", "name", "notes"]
