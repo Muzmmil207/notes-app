@@ -1,13 +1,12 @@
 from app.models import *
 from django.db.models import Q
-from rest_framework import generics, mixins, status, views
+from rest_framework import generics, mixins, status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.renderers import AdminRenderer
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from .serializers import NotesSerializer
+from .serializers import LabelsSerializer, NotesSerializer
 
 
 @api_view(["GET"])
@@ -27,7 +26,6 @@ class NotesList(
     mixins.RetrieveModelMixin,
 ):
     serializer_class = NotesSerializer
-    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         return self.list(request)
@@ -58,6 +56,17 @@ class NotesList(
             )
 
         return queryset
+
+
+class NotesByLabel(
+    generics.RetrieveAPIView,
+):
+    queryset = Label.objects.all()
+    serializer_class = LabelsSerializer
+    lookup_field = "id"
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
 
 class NoteDetails(

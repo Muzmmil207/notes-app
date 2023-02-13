@@ -8,7 +8,7 @@ def labels(request):
         return {
             "labels": Label.objects.filter(user=request.user)
             .values("name")
-            .annotate(count_notes=Count("note"))
+            .annotate(count_notes=Count("notes"))
         }
     return {"labels": []}
 

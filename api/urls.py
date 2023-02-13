@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path("", views.get_routes),
     path("all-notes", views.NotesList.as_view(), name="notes_list"),
+    path("labels/<str:id>", views.NotesByLabel.as_view(), name="labels"),
     path("single-notes/<str:id>", views.NoteDetails.as_view(), name="single_note"),
 ]
 

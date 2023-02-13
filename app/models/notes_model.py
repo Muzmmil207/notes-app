@@ -20,6 +20,7 @@ class Note(Model):
     user = models.ForeignKey(User, on_delete=CASCADE)
     label = models.ForeignKey(
         Label,
+        related_name="notes",
         on_delete=CASCADE,
         blank=True,
         null=True,

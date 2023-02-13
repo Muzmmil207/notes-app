@@ -7,7 +7,7 @@ from .models import Note
 
 @app.task(bind=True)
 def dump_context(self, user_email, note_id, title, content):
-    subject = "%s " % title
+    subject = "~%s~" % title
     message = render_to_string(
         "mails/note-reminder.html",
         {

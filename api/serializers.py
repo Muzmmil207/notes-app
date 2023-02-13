@@ -1,14 +1,19 @@
 from datetime import datetime
 
-from app.models import Note
+from app.models import Label, Note
 from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer, ValidationError
+from rest_framework.serializers import (
+    HyperlinkedModelSerializer,
+    ModelSerializer,
+    ValidationError,
+)
 
 
 class NotesSerializer(ModelSerializer):
-    """A serializer class for note model"""
+    """A serializer class for Note model"""
 
     url = serializers.CharField(source="get_absolute_url", read_only=True)
+    label = serializers.StringRelatedField()
 
     class Meta:
         model = Note
@@ -36,7 +41,17 @@ class NotesSerializer(ModelSerializer):
         """
         Check that the type of note.remind is a datetime object.
         """
-        if not type(value) is datetime or value != None:
+        if value and type(value) is not datetime:
             raise ValidationError("remind is not datetime object.")
 
         return value
+
+
+class LabelsSerializer(ModelSerializer):
+    """A serializer class for Label model"""
+
+    notes = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Label
+        fields = ["user", "name", "notes", "id"]
