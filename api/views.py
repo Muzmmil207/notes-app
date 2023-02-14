@@ -1,7 +1,11 @@
 from app.models import *
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from rest_framework import generics, mixins, status
 from rest_framework.decorators import api_view
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -26,8 +30,13 @@ class NotesList(
     mixins.RetrieveModelMixin,
 ):
     serializer_class = NotesSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ["title", "content"]
 
-    def get(self, request):
+    # With cookie: cache requested url for each user for 2 minute
+    @method_decorator(cache_page(60 * 2))
+    @method_decorator(vary_on_cookie)
+    def get(self, request, format=None):
         return self.list(request)
 
     def post(self, request, format=None):
@@ -47,13 +56,13 @@ class NotesList(
     def get_queryset(self):
         user = self.request.user
         queryset = user.note_set.all().order_by("-created_at", "-updated_at")
-        search_query = self.request.query_params.get("search")
+        # search_query = self.request.query_params.get("search")
 
-        if search_query is not None:
-            queryset = queryset.filter(
-                Q(Q(title__iexact=search_query) | Q(title__icontains=search_query))
-                | Q(content__icontains=search_query)
-            )
+        # if search_query is not None:
+        #     queryset = queryset.filter(
+        #         Q(Q(title__iexact=search_query) | Q(title__icontains=search_query))
+        #         | Q(content__icontains=search_query)
+        #     )
 
         return queryset
 

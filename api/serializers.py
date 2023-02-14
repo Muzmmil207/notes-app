@@ -2,11 +2,7 @@ from datetime import datetime
 
 from app.models import Label, Note
 from rest_framework import serializers
-from rest_framework.serializers import (
-    HyperlinkedModelSerializer,
-    ModelSerializer,
-    ValidationError,
-)
+from rest_framework.serializers import ModelSerializer, ValidationError
 
 
 class NotesSerializer(ModelSerializer):
