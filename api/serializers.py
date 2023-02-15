@@ -9,7 +9,9 @@ class NotesSerializer(ModelSerializer):
     """A serializer class for Note model"""
 
     url = serializers.CharField(source="get_absolute_url", read_only=True)
-    label = serializers.StringRelatedField()
+    label = serializers.StringRelatedField(
+        read_only=True,
+    )
 
     class Meta:
         model = Note
@@ -50,4 +52,4 @@ class LabelsSerializer(ModelSerializer):
 
     class Meta:
         model = Label
-        fields = ["user", "name", "notes"]
+        fields = ["id", "user", "name", "notes"]

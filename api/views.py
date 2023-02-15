@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
-from rest_framework import generics, mixins, status
+from rest_framework import generics, mixins, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
@@ -67,15 +67,17 @@ class NotesList(
         return queryset
 
 
-class NotesByLabel(
-    generics.RetrieveAPIView,
-):
-    queryset = Label.objects.all()
-    serializer_class = LabelsSerializer
-    lookup_field = "id"
+from rest_framework import viewsets
+from rest_framework.response import Response
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+
+class NotesByLabel(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing user instances.
+    """
+
+    serializer_class = LabelsSerializer
+    queryset = Label.objects.all()
 
 
 class NoteDetails(

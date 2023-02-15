@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     "ckeditor",
     "rest_framework",
     "rest_framework.authtoken",
-    # "django_elasticsearch_dsl",
 ]
 
 MIDDLEWARE = [
@@ -96,10 +95,12 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379",
     }
 }
-
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
@@ -164,12 +165,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# Elastic Search setting
-# ELASTICSEARCH_DSL = {
-#     "default": {
-#         "hosts": "localhost:9200",
-#     },
-# }
 
 # Celery setting
 CELERY_BROKER_URL = "redis://localhost:6379"
