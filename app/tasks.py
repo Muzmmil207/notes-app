@@ -1,3 +1,4 @@
+from celery import shared_task
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from notes.celery import app
@@ -5,7 +6,7 @@ from notes.celery import app
 from .models import Note
 
 
-@app.task(bind=True)
+@shared_task(bind=True)
 def dump_context(self, user_email, note_id, title, content):
     subject = "~%s~" % title
     message = render_to_string(
