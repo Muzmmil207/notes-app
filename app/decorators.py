@@ -7,7 +7,7 @@ def is_not_authenticated(function):
     @wraps(function)
     def wrap(request, *args):
         if request.user.is_authenticated:
-            return redirect("home")
+            return redirect("home-page")
         else:
             return function(request, *args)
 

@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 from django.db.models import CASCADE, Model
 from django.utils.translation import gettext as _
+
 from .user_model import User
 
 
@@ -14,7 +15,7 @@ class Label(Model):
         verbose_name=_("ID"),
     )
     user = models.ForeignKey(User, on_delete=CASCADE)
-    name = models.CharField(
+    name = models.DateTimeField(
         max_length=255,
         blank=False,
         null=False,

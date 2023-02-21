@@ -19,12 +19,6 @@ class UserLoginForm(AuthenticationForm):
 
 
 class RegistrationForm(ModelForm):
-    first_name = forms.CharField(
-        label="Enter First Name", min_length=4, max_length=150, help_text="Required"
-    )
-    last_name = forms.CharField(
-        label="Enter Last Name", min_length=4, max_length=150, help_text="Required"
-    )
     email = forms.CharField(
         max_length=50,
         help_text="Required",
@@ -35,16 +29,10 @@ class RegistrationForm(ModelForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email")
+        fields = ("email",)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["first_name"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "first name"}
-        )
-        self.fields["last_name"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "last name"}
-        )
         self.fields["email"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "E-mail"}
         )
@@ -67,12 +55,12 @@ class RegistrationForm(ModelForm):
             raise forms.ValidationError("Please use another Email, this is already taken")
         return email
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
+    # def save(self, commit=True):
+    #     user = super().save(commit=False)
+    #     user.set_password(self.cleaned_data["password1"])
+    #     if commit:
+    #         user.save()
+    #     return user
 
 
 class NoteForm(ModelForm):

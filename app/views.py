@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
 
@@ -16,9 +17,8 @@ class HomeView(TemplateView):
 
 @login_required
 def single_note_view(request, pk):
-    note = get_object_or_404(Note, id=pk, user=request.user)
+    note = get_object_or_404(Note, id=pk, user__id=request.user.id)
     form = NoteForm(instance=note)
-
     context = {"id": pk, "form": form}
     return render(request, "single-note.html", context=context)
 
@@ -83,7 +83,7 @@ def register_view(request):
 
     if request.method == "POST":
         if form.is_valid():
-            user = form.save()
+            form.save()
             messages.success(request, "Account successfully created.")
             return redirect("login")
 
