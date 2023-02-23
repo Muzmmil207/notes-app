@@ -15,7 +15,7 @@ class Label(Model):
         verbose_name=_("ID"),
     )
     user = models.ForeignKey(User, on_delete=CASCADE)
-    name = models.DateTimeField(
+    name = models.CharField(
         max_length=255,
         blank=False,
         null=False,
