@@ -5,6 +5,7 @@ from django.contrib.auth.forms import (
     SetPasswordForm,
 )
 from django.forms import ModelForm
+from django.utils import timezone
 
 from .models import Label, Note, User
 
@@ -76,6 +77,7 @@ class NoteForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["remind"].widget.attrs.update({"class": "form-element", "placeholder": ""})
+        self.fields["remind"].initial = timezone.now()
         self.fields["label"].widget.attrs.update({"class": "form-element", "placeholder": ""})
         self.fields["title"].widget.attrs.update(
             {"class": "form-element", "placeholder": "Enter a Title"}

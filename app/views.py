@@ -36,8 +36,7 @@ def new_label(request):
     form = LabelForm()
     if request.method == "POST":
         form = LabelForm(request.POST)
-        print(request.POST)
-        print(form.is_valid())
+
         if form.is_valid():
             data = form.save(commit=False)
             data.user = request.user
